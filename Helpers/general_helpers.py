@@ -2,7 +2,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium import webdriver
 import shutil
-from conftest import BrowserHelper 
 import os
 import logging
 
@@ -65,14 +64,15 @@ class GeneralHelper():
         except Exception as e:
             print(f"Error writing to file: {e}")
 
-    def create_screenshot(self, driver, screen): 
-        folder_path = os.path.join(os.path.dirname(__file__), data.folder_name)       
+
+    def find_and_click(self, element):
         try:
-            if not os.path.exists(folder_path):
-                os.makedirs(folder_path)
-            driver.save_screenshot(os.path.join(folder_path, screen))
+            EC.element_to_be_clickable(element)
+            element.click()
+
         except Exception as e:
-            print(f"Error creating screenshot: {e}")
+            print(f"Error: {e}")
+
 
     def delete_file(self, files):
         file_path = os.path.join(os.path.dirname(__file__), files)
