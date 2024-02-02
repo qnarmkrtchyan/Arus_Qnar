@@ -20,12 +20,15 @@ def test_search_by_brand(mydriver):
     helper_obj = Helper(driver)
     helper_obj.navigate_to_page(my_config.url)
     
+    #login part
     header_nav = header6PMPage(driver)
     header_nav.open_login_page()
     login_page = Login(driver)
     login_page.try_to_login()
-    logging.info(f"user with email {my_config.email} has been logged in successfully!")
 
     helper_obj.find_and_send_keys(header6PMPage.search_input, test_data.search_text)
     helper_obj.find_and_click(header6PMPage.search_btn)
-    logging.info(f"The search of {test_data.search_text} was successfully!")
+
+    #search part
+    header_nav.search_items()
+    
