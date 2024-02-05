@@ -73,7 +73,7 @@ class GeneralHelper():
         except Exception as e:
             print(f"Error: {e}")
 
-
+    # TODO, remove, as you have separate file under Helper
     def delete_file(self, files):
         file_path = os.path.join(os.path.dirname(__file__), files)
         try:
@@ -100,3 +100,4 @@ class GeneralHelper():
                 print(f"'{files}' does not exist.")
         except Exception as e:
             print(f"Error occurred while deleting '{files}'. Exception: {e}")
+# TODO,add logging in all methods            
