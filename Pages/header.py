@@ -11,10 +11,9 @@ class header6PMPage(Helper):
     # TODO, keep line
     search_input = (By.CSS_SELECTOR,"input[placeholder = 'Search 6pm.com']")
     search_btn = (By.XPATH,"//form[@id = 'searchForm']//button")
-    login_icon = (By.XPATH, "//div[@class='z-z']/a[contains(@href, 'account')]")
+    login_icon = (By.XPATH, "//a[@class='F-z']")
     btn_search = (By.XPATH, "//button[normalize-space()='Submit Search']")
     
-
     def open_login_page(self):
         try:
             self.wait_and_click(self.login_icon)
@@ -25,7 +24,7 @@ class header6PMPage(Helper):
 
     def search_items(self):
         try:
-            inp = self.find_and_send_keys(self.search_input, test_data.search_text) # TODO, inp variable is not used
+            self.find_and_send_keys(self.search_input, test_data.search_text) # TODO, inp variable is not used
             time.sleep(2) # TODO, dont use time sleep
             self.wait_and_click(self.btn_search)
             time.sleep(2)

@@ -7,7 +7,7 @@ import my_config
 import logging,datetime, time
 from Pages.login import Login
 from Pages.header import header6PMPage
-from Pages.header import header6PMPage
+from Pages.home import HomePage
 import TestData.test_data as test_data  # TODO, remove not used libs
 
 
@@ -22,13 +22,18 @@ def test_search_by_brand(mydriver):
     
     #login part
     header_nav = header6PMPage(driver)
-    header_nav.open_login_page()
-    login_page = Login(driver)
-    login_page.try_to_login()
-
-    # helper_obj.find_and_send_keys(header6PMPage.search_input, test_data.search_text)
-    # helper_obj.find_and_click(header6PMPage.search_btn)
+    #header_nav.open_login_page()
+    # login_page = Login(driver)
+    # login_page.try_to_login()
 
     #search part
     header_nav.search_items()
+    time.sleep(2)
+
+    home_page = HomePage(driver)
+    home_page.check_search_result()
+    
+    home_page.apply_filter_and_create_dict()
+    home_page.get_filtered_result_texts()
+    
     time.sleep(2)

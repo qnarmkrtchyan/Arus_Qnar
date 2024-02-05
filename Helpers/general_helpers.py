@@ -27,7 +27,7 @@ class GeneralHelper():
 
     def wait_and_click(self, element):
         try:
-            elem = WebDriverWait(self.driver, 20).until(
+            elem = WebDriverWait(self.driver, 100).until(
                 EC.element_to_be_clickable((element)))
             elem.click()
         except Exception as e:
@@ -40,6 +40,8 @@ class GeneralHelper():
             return elem
         except Exception as e:
             print(f"Error finding element in DOM: {e}")
+        
+    
 
     def wait_visibility(self, element):
         try:
@@ -48,6 +50,21 @@ class GeneralHelper():
             return elem
         except Exception as e:
             print(f"Error waiting for element visibility: {e}")
+    
+    def find_elements(self, element):
+        try:
+            elem = WebDriverWait(self.driver, 60).until(
+                EC.visibility_of_all_elements_located(element))
+            return elem
+        except Exception as e:
+            print(f"Error waiting for element visibility: {e}")
+    
+    def find_elems_dom(self, element, timeout=100):
+        try:
+            return WebDriverWait(self.driver, timeout).until(
+                EC.presence_of_all_elements_located(element))
+        except Exception as e:
+            logging.error(f"Error in 'find_elems_in_dom': {e}")
     
     def find_and_send_keys(self, element, inp_text):
         try:
@@ -65,39 +82,13 @@ class GeneralHelper():
             print(f"Error writing to file: {e}")
 
 
-    def find_and_click(self, element):
-        try:
-            EC.element_to_be_clickable(element)
-            element.click()
+    # def find_and_click(self, element, ):
+    #     try:
+    #         EC.element_to_be_clickable(element)
+    #         element.click()
 
-        except Exception as e:
-            print(f"Error: {e}")
+    #     except Exception as e:
+    #         print(f"Error: {e}")
 
-    # TODO, remove, as you have separate file under Helper
-    def delete_file(self, files):
-        file_path = os.path.join(os.path.dirname(__file__), files)
-        try:
-            if os.path.exists(file_path):
-                if os.path.isdir(file_path):
-                    confirm = input(f"Do you want to remove '{files}' folder and its contents? (yes/no): ")
-                    if confirm.lower() == "yes":
-                        shutil.rmtree(file_path)
-                        print(f"'{files}' folder and its contents have been deleted.")
-                    elif confirm.lower() == "no":
-                        print(f"'{files}' folder hasn't been deleted.")
-                    else:
-                        print(f"'{files}' folder hasn't been deleted, because of incorrect input.")
-                else:
-                    confirm = input(f"Do you want to remove '{files}' file? (yes/no): ")
-                    if confirm.lower() == "yes":
-                        os.remove(file_path)
-                        print(f"'{files}' file has been deleted.")
-                    elif confirm.lower() == "no":
-                        print(f"'{files}' file hasn't been deleted.")
-                    else:
-                        print(f"'{files}' file hasn't been deleted, because of incorrect input.")
-            else:
-                print(f"'{files}' does not exist.")
-        except Exception as e:
-            print(f"Error occurred while deleting '{files}'. Exception: {e}")
+
 # TODO,add logging in all methods            
