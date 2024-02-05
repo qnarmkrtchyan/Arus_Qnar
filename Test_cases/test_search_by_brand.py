@@ -4,12 +4,12 @@
 from  conftest import driver as mydriver
 from Helpers.general_helpers import GeneralHelper as Helper
 import my_config
-import logging,datetime, time
+import logging,datetime
 from Pages.login import Login
 from Pages.header import header6PMPage
 from Pages.header import header6PMPage
 import TestData.test_data as test_data
-
+import time
 
 def test_search_by_brand(mydriver):
 
@@ -26,9 +26,7 @@ def test_search_by_brand(mydriver):
     login_page = Login(driver)
     login_page.try_to_login()
 
-    # helper_obj.find_and_send_keys(header6PMPage.search_input, test_data.search_text)
-    # helper_obj.find_and_click(header6PMPage.search_btn)
-
     #search part
+    
     header_nav.search_items()
-    time.sleep(2)
+    time.sleep(5)
